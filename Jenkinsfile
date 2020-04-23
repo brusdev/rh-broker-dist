@@ -7,6 +7,7 @@ def build_url
 def build_id
 
 node ("messaging-ci-01.vm2") {
+  /*
     stage('prepare amq master prod branch') {
         build(
         job: 'update_master_branch',
@@ -34,6 +35,7 @@ node ("messaging-ci-01.vm2") {
           }
         }
     }
+    */
     stage('build amq nightly') {
         /*
         def amq = build(
