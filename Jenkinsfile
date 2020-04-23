@@ -74,6 +74,7 @@ node ("messaging-ci-01.vm2") {
         amq_broker_version = amq_broker_redhat_version.substring(0, amq_broker_redhat_version.indexOf('-'))
         sh "echo amq_broker_version amq_broker_version"
     }
+    /*
     stage ("Update Stagger") {
         checkout scm
         sh "sh ./scripts/pushamq.sh $build_id $build_url $amq_broker_version $amq_broker_redhat_version"
@@ -91,4 +92,5 @@ node ("messaging-ci-01.vm2") {
         )
 
     }
+    */
 }
