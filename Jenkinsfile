@@ -66,9 +66,9 @@ node ("messaging-ci-01.vm2") {
         build_id = "618"
         build_url = "http://messaging-ci-01.mw.lab.eng.bos.redhat.com:8080/job/amq-pnc-build/618/"
         sh "rm -f repository-artifact-list.txt"
-        def build_dir = sh(returnStdout: true, script: "wget -qO- ${amq.absoluteUrl}/artifact/BUILD_DIR")
+        def build_dir = sh(returnStdout: true, script: "wget -qO- http://messaging-ci-01.mw.lab.eng.bos.redhat.com:8080/job/amq-pnc-build/618/artifact/BUILD_DIR")
         sh "echo $build_dir ..."
-        sh "wget ${amq.absoluteUrl}/artifact/${build_dir}/extras/repository-artifact-list.txt"
+        sh "wget http://messaging-ci-01.mw.lab.eng.bos.redhat.com:8080/job/amq-pnc-build/618/artifact/${build_dir}/extras/repository-artifact-list.txt"
         amq_broker_redhat_version = sh(script: "grep org.jboss.rh-messaging.amq:amq-broker: repository-artifact-list.txt|cut -d':' -f3", returnStdout: true)
         sh "echo amq_broker_redhat_version $amq_broker_redhat_version"
         amq_broker_version = amq_broker_redhat_version.substring(0, amq_broker_redhat_version.indexOf('-'))
