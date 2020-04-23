@@ -60,7 +60,9 @@ node ("messaging-ci-01.vm2") {
         sh "echo $build_url"
         build_id = "${amqVariables.BUILD_ID}"
         sh "rm -f repository-artifact-list.txt"
-        sh "wget ${amq.absoluteUrl}/artifact/amq-broker-7.6.0.ER1/extras/repository-artifact-list.txt"
+        def build_dir = sh(returnStdout: true, script: "wget -qO- ${amq.absoluteUrl}/artifact/BUILD_DIR")
+        sh "echo $build_dir"
+        sh "wget ${amq.absoluteUrl}/artifact/$build_dir/extras/repository-artifact-list.txt"
         amq_broker_redhat_version = sh(script: "grep org.jboss.rh-messaging.amq:amq-broker: repository-artifact-list.txt|cut -d':' -f3", returnStdout: true)
         sh "echo amq_broker_redhat_version $amq_broker_redhat_version"
         amq_broker_version = amq_broker_redhat_version.substring(0, amq_broker_redhat_version.indexOf('-'))
